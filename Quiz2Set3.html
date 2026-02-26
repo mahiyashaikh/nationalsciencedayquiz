@@ -2,10 +2,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Science & Technology Quiz – Set 2</title>
+<title>Science & Technology Quiz – Set 3</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
 <style>
-/* ----- Same enhanced styles as Set 1 ----- */
+/* ----- same enhanced styles as before ----- */
 body {
     margin:0;
     font-family:'Orbitron','Segoe UI',sans-serif;
@@ -135,16 +135,21 @@ button:hover {
     font-family:'Orbitron',monospace;
 }
 #cardText { width:100%; white-space:pre-wrap; }
+@media (max-width:700px) {
+    .flashcard { font-size:1.8rem; padding:20px; }
+    button { font-size:1.5rem; padding:15px 30px; }
+}
 </style>
 </head>
 <body>
 
-<!-- NO INTRO SCREEN – only countdown and quiz -->
+<!-- COUNTDOWN (active on load) -->
 <div class="screen active" id="countdown">
     <h1 style="font-size:4rem;">Prepare for Launch</h1>
     <div id="countdownNumber">3</div>
 </div>
 
+<!-- QUIZ -->
 <div class="screen" id="quiz">
     <div class="flashcard" onclick="nextCard()">
         <div id="cardText"></div>
@@ -156,7 +161,7 @@ button:hover {
 </div>
 
 <script>
-// Audio and logic (same as Set1)
+// Audio functions
 let audioCtx = null;
 function initAudio() {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -191,7 +196,10 @@ const data = [
     {q:"Bending of light phenomenon?", a:"Refraction"}
 ];
 
-let i=0, showAnswer=false, timer, currentSec=10;
+let i = 0;
+let showAnswer = false;
+let timer;
+let currentSec = 10;
 
 // Start countdown automatically on page load
 window.onload = function() {
@@ -220,44 +228,63 @@ function startCountdown() {
 }
 
 function showQuestion() {
-    document.getElementById('cardText').innerText = "Q"+(i+1)+"\n\n"+data[i].q;
-    showAnswer=false; playNextSound(); startTimer();
+    document.getElementById('cardText').innerText = "Q" + (i+1) + "\n\n" + data[i].q;
+    showAnswer = false;
+    playNextSound();
+    startTimer();
 }
+
 function showAnswerCard() {
-    document.getElementById('cardText').innerText = "✔ ANSWER\n\n"+data[i].a;
-    showAnswer=true; playAnswerSound(); startTimer();
+    document.getElementById('cardText').innerText = "✔ ANSWER\n\n" + data[i].a;
+    showAnswer = true;
+    playAnswerSound();
+    startTimer();
 }
+
 function nextCard() {
     clearInterval(timer);
-    if(!showAnswer) showAnswerCard();
-    else {
+    if (!showAnswer) {
+        showAnswerCard();
+    } else {
         i++;
-        if(i>=data.length) {
+        if (i >= data.length) {
             playFanfare();
-            document.querySelector('.flashcard').innerHTML=`
+            document.querySelector('.flashcard').innerHTML = `
                 <div style="font-size:2.5rem;">
                 🎉 SET 3 COMPLETED 🎉<br><br>
                 <button onclick="goNext()">➜ SET 4</button>
                 </div>`;
-            document.getElementById('timerRing').innerText='🏆';
+            document.getElementById('timerRing').innerText = '🏆';
             return;
         }
         showQuestion();
     }
 }
+
+// Timer counts down but does NOT auto‑flip
 function startTimer() {
-    currentSec=10; updateTimerDisplay();
-    timer=setInterval(()=>{ currentSec--; updateTimerDisplay(); playTick();
-        if(currentSec<=0){ clearInterval(timer); nextCard(); }
-    },1000);
+    currentSec = 10;
+    updateTimerDisplay();
+    timer = setInterval(() => {
+        currentSec--;
+        updateTimerDisplay();
+        playTick();
+        if (currentSec <= 0) {
+            clearInterval(timer);   // only stop, no nextCard()
+        }
+    }, 1000);
 }
+
 function updateTimerDisplay() {
-    const ring=document.getElementById('timerRing');
-    ring.innerText=currentSec;
-    let deg=(currentSec/10)*360;
-    ring.style.background=`conic-gradient(cyan ${deg}deg, transparent ${deg}deg)`;
+    const ring = document.getElementById('timerRing');
+    ring.innerText = currentSec;
+    let deg = (currentSec / 10) * 360;
+    ring.style.background = `conic-gradient(cyan ${deg}deg, transparent ${deg}deg)`;
 }
-function goNext() { window.location.href="Quiz2Set4.html"; }
+
+function goNext() {
+    window.location.href = "Quiz2Set4.html";
+}
 </script>
 </body>
 </html>
