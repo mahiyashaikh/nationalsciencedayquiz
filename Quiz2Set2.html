@@ -5,7 +5,143 @@
 <title>Science & Technology Quiz – Set 2</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
 <style>
-/* same CSS as Set 1 – copy from above */
+body {
+    margin:0;
+    font-family:'Orbitron','Segoe UI',sans-serif;
+    background:radial-gradient(circle at 20% 20%,#0b1721,#030b10);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+}
+body::before, body::after {
+    content:'';
+    position:fixed;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:0;
+    opacity:0.1;
+}
+body::before {
+    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.2"><text x="10" y="20" font-size="18" fill="cyan">🔬</text><text x="70" y="80" font-size="24" fill="lime">🧪</text><text x="30" y="90" font-size="30" fill="magenta">🚀</text><text x="80" y="30" font-size="22" fill="yellow">⚛️</text></svg>');
+    animation:drift 40s linear infinite;
+}
+body::after {
+    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.15"><text x="120" y="50" font-size="28" fill="white">🧬</text><text x="10" y="150" font-size="32" fill="lightblue">🔭</text><text x="150" y="180" font-size="26" fill="orange">💡</text></svg>');
+    animation:drift 60s reverse infinite;
+}
+@keyframes drift {
+    0% { transform:translate(0,0); }
+    100% { transform:translate(-20px,-20px); }
+}
+.screen {
+    display:none;
+    text-align:center;
+    width:90%;
+    max-width:1200px;
+    z-index:10;
+    animation:fadeGlow 0.6s ease-out;
+}
+.active { display:block; }
+@keyframes fadeGlow {
+    0% { opacity:0; filter:blur(5px); }
+    100% { opacity:1; filter:blur(0); }
+}
+.flashcard {
+    width:80vw;
+    max-width:1000px;
+    min-height:50vh;
+    background:rgba(10,20,30,0.85);
+    backdrop-filter:blur(12px);
+    border:2px solid rgba(0,255,255,0.5);
+    color:#e0f0ff;
+    border-radius:50px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px;
+    margin:30px auto;
+    cursor:pointer;
+    box-shadow:0 0 50px rgba(0,255,200,0.3), inset 0 0 30px rgba(0,255,255,0.2);
+    transition:all 0.3s;
+    font-size:2.8rem;
+    line-height:1.4;
+    word-break:break-word;
+}
+.flashcard:hover {
+    transform:scale(1.02) rotate(0.5deg);
+    box-shadow:0 0 80px cyan, inset 0 0 50px cyan;
+    border-color:white;
+}
+button {
+    padding:20px 50px;
+    font-size:2rem;
+    font-weight:bold;
+    border:none;
+    border-radius:60px;
+    background:linear-gradient(45deg,#ff6ec4,#7873f5,#3bc9db);
+    color:white;
+    cursor:pointer;
+    box-shadow:0 0 30px hotpink, 0 0 60px rgba(120,115,245,0.7);
+    transition:0.2s;
+    text-transform:uppercase;
+    letter-spacing:3px;
+    margin:10px;
+}
+button:hover {
+    transform:scale(1.1);
+    box-shadow:0 0 50px white, 0 0 90px cyan;
+}
+#countdownNumber {
+    font-size:20vw;
+    font-weight:900;
+    text-shadow:0 0 40px cyan, 0 0 80px blue;
+    animation:pulse 1s infinite;
+    margin:20px 0;
+}
+@keyframes pulse {
+    0% { transform:scale(1); text-shadow:0 0 30px cyan; }
+    50% { transform:scale(1.2); text-shadow:0 0 80px magenta; }
+    100% { transform:scale(1); text-shadow:0 0 30px cyan; }
+}
+.timer-container {
+    margin-top:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+}
+.timer-ring {
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    background:conic-gradient(cyan 0deg, transparent 0deg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:4rem;
+    font-weight:bold;
+    color:white;
+    text-shadow:0 0 20px cyan;
+    border:4px solid rgba(255,255,255,0.3);
+    box-shadow:0 0 50px cyan;
+    transition:background 0.1s linear;
+    font-family:'Orbitron',monospace;
+}
+#intro h1 { font-size:5rem; text-shadow:0 0 30px cyan; }
+#intro h2 { font-size:3rem; text-shadow:0 0 20px magenta; }
+#cardText { width:100%; white-space:pre-wrap; }
+@media (max-width:700px) {
+    .flashcard { font-size:1.8rem; padding:20px; }
+    button { font-size:1.5rem; padding:15px 30px; }
+    #intro h1 { font-size:3rem; }
+    #intro h2 { font-size:2rem; }
+}
 </style>
 </head>
 <body>
@@ -125,3 +261,4 @@ function goNext() { window.location.href = "Quiz2Set3.html"; }
 </script>
 </body>
 </html>
+
