@@ -2,13 +2,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Science & Technology Quiz – Set 1</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+<title>Science & Technology Quiz – Set A</title>
 <style>
-/* ----- same enhanced styles as before ----- */
+/* ----- Times New Roman, extra large for projector ----- */
 body {
     margin:0;
-    font-family:'Orbitron','Segoe UI',sans-serif;
+    font-family:'Times New Roman', Times, serif;
     background:radial-gradient(circle at 20% 20%,#0b1721,#030b10);
     color:white;
     display:flex;
@@ -43,7 +42,7 @@ body::after {
     display:none;
     text-align:center;
     width:90%;
-    max-width:1200px;
+    max-width:1400px;
     z-index:10;
     animation:fadeGlow 0.6s ease-out;
 }
@@ -53,25 +52,25 @@ body::after {
     100% { opacity:1; filter:blur(0); }
 }
 .flashcard {
-    width:80vw;
-    max-width:1000px;
-    min-height:50vh;
+    width:85vw;
+    max-width:1200px;
+    min-height:60vh;
     background:rgba(10,20,30,0.85);
     backdrop-filter:blur(12px);
-    border:2px solid rgba(0,255,255,0.5);
+    border:4px solid rgba(0,255,255,0.5);
     color:#e0f0ff;
     border-radius:50px;
     display:flex;
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:40px;
+    padding:50px;
     margin:30px auto;
     cursor:pointer;
     box-shadow:0 0 50px rgba(0,255,200,0.3), inset 0 0 30px rgba(0,255,255,0.2);
     transition:all 0.3s;
-    font-size:2.8rem;
-    line-height:1.4;
+    font-size:4rem;
+    line-height:1.6;
     word-break:break-word;
 }
 .flashcard:hover {
@@ -80,8 +79,8 @@ body::after {
     border-color:white;
 }
 button {
-    padding:20px 50px;
-    font-size:2rem;
+    padding:25px 60px;
+    font-size:3rem;
     font-weight:bold;
     border:none;
     border-radius:60px;
@@ -115,33 +114,34 @@ button:hover {
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:20px;
+    gap:30px;
 }
 .timer-ring {
-    width:120px;
-    height:120px;
+    width:150px;
+    height:150px;
     border-radius:50%;
     background:conic-gradient(cyan 0deg, transparent 0deg);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:4rem;
+    font-size:5rem;
     font-weight:bold;
     color:white;
     text-shadow:0 0 20px cyan;
     border:4px solid rgba(255,255,255,0.3);
     box-shadow:0 0 50px cyan;
     transition:background 0.1s linear;
-    font-family:'Orbitron',monospace;
+    font-family:'Times New Roman', Times, serif;
 }
-#intro h1 { font-size:5rem; text-shadow:0 0 30px cyan; }
-#intro h2 { font-size:3rem; text-shadow:0 0 20px magenta; }
+#intro h1 { font-size:6rem; text-shadow:0 0 30px cyan; }
+#intro h2 { font-size:4rem; text-shadow:0 0 20px magenta; }
 #cardText { width:100%; white-space:pre-wrap; }
 @media (max-width:700px) {
-    .flashcard { font-size:1.8rem; padding:20px; }
-    button { font-size:1.5rem; padding:15px 30px; }
-    #intro h1 { font-size:3rem; }
-    #intro h2 { font-size:2rem; }
+    .flashcard { font-size:2.5rem; padding:30px; }
+    button { font-size:2rem; padding:15px 30px; }
+    #intro h1 { font-size:4rem; }
+    #intro h2 { font-size:2.5rem; }
+    .timer-ring { width:100px; height:100px; font-size:3rem; }
 }
 </style>
 </head>
@@ -149,14 +149,14 @@ button:hover {
 
 <!-- INTRO -->
 <div class="screen active" id="intro">
-    <h1>🔬 SCIENCE & TECH ⚡</h1>
+    <h1>🔬 SCIENCE & TECH QUIZ 🔭</h1>
     <h2>Women in Science 👩‍🔬✨</h2>
     <button onclick="startQuiz()">🚀 START QUIZ</button>
 </div>
 
 <!-- COUNTDOWN -->
 <div class="screen" id="countdown">
-    <h1 style="font-size:4rem;">Prepare for Launch</h1>
+    <h1 style="font-size:5rem;">Prepare for Launch</h1>
     <div id="countdownNumber">3</div>
 </div>
 
@@ -166,13 +166,13 @@ button:hover {
         <div id="cardText"></div>
     </div>
     <div class="timer-container">
-        <span style="font-size:3rem;">⏳</span>
+        <span style="font-size:4rem;">⏳</span>
         <div class="timer-ring" id="timerRing">10</div>
     </div>
 </div>
 
 <script>
-// Audio
+// Audio functions
 let audioCtx = null;
 function initAudio() {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -198,13 +198,13 @@ function playFanfare() {
     setTimeout(()=>beep(784,0.6,'sine',0.4),600);
 }
 
-// Set 1 data
+// Set A data (from your document)
 const data = [
-    {q:"What is the dominant process in nuclear fusion inside the Sun?", a:"Proton–Proton Chain Reaction"},
-    {q:"Which technology is used in blockchain?", a:"Asymmetric Cryptography"},
-    {q:"First artificial Earth satellite?", a:"Sputnik 1"},
-    {q:"Full form of ISRO?", a:"Indian Space Research Organisation"},
-    {q:"Unit of Planck’s constant?", a:"Joule second (J·s)"}
+    {q:"Who is known as the 'Father of Genetics' for his work on pea plants?", a:"Gregor Mendel"},
+    {q:"Which cell organelle is known as the 'Powerhouse of the Cell'?", a:"Mitochondrion"},
+    {q:"Which country developed the world's first AI-powered traffic management system in 2025?", a:"Singapore"},
+    {q:"In quantum mechanics, the uncertainty principle was formulated by?", a:"Heisenberg"},
+    {q:"In machine learning, overfitting occurs when?", a:"Model performs well on training data but poorly on test data"}
 ];
 
 let i = 0;
@@ -258,9 +258,9 @@ function nextCard() {
         if (i >= data.length) {
             playFanfare();
             document.querySelector('.flashcard').innerHTML = `
-                <div style="font-size:2.5rem;">
-                🎉 SET 1 COMPLETED 🎉<br><br>
-                <button onclick="goNext()">➜ SET 2</button>
+                <div style="font-size:3rem;">
+                🎉 SET A COMPLETED 🎉<br><br>
+                <button onclick="goNext()">➜ SET B</button>
                 </div>`;
             document.getElementById('timerRing').innerText = '🏆';
             return;
@@ -269,7 +269,6 @@ function nextCard() {
     }
 }
 
-// MODIFIED TIMER: only counts down, does NOT auto‑flip at zero
 function startTimer() {
     currentSec = 10;
     updateTimerDisplay();
@@ -278,8 +277,7 @@ function startTimer() {
         updateTimerDisplay();
         playTick();
         if (currentSec <= 0) {
-            clearInterval(timer);   // Stop timer, but do NOT call nextCard()
-            // Optional: change timer appearance to indicate time's up
+            clearInterval(timer);
         }
     }, 1000);
 }
